@@ -1,2 +1,2 @@
 * Gerador de curiosidades sobre gatos
-* API consumida https://catfact.ninja/fact
+* API consumida https://catfact.ninja/
