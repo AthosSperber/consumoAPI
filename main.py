@@ -4,35 +4,58 @@ import emoji
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
+from rich.progress import track
+from time import sleep
 
-# Cria um objeto Console
+# objeto Console
 console = Console()
 
 def curiosidade():
     url = "https://catfact.ninja/fact"  # Fatos aleatórios sobre gatos
     tradutor = Translator(to_lang="pt-br")  # Biblioteca para traduzir os fatos
-    response = requests.get(url)
-    dados = response.json()
+    resposta_API = requests.get(url)
+    dados = resposta_API.json()
     
     fato = dados['fact']
     fato_traduzido = tradutor.translate(fato)
 
     return fato_traduzido
 
-repitir = 1
+def carregando():
+    #efeito de carregando
+    console.print("\n[bold blue]Carregando novo fato felino...[/bold blue]")
+    for _ in track(range(20), description=""):
+        sleep(0.05)
+
+def main():
+    repitir = 1
     
-while True:
-    fato = curiosidade()
+    while True:
+       
+        fato = curiosidade()
+        carregando()
 
-    fato_txt = Text.from_markup(f"{emoji.emojize(':cat_face:')} [bold green]Curiosidade número {repitir}[/bold green] {emoji.emojize(':cat_face:')}\n{emoji.emojize(':cat:')} [italic] {fato} [/italic] {emoji.emojize(':cat:')}")
-    painel = Panel(fato_txt, title="Curiosidades Gatísticas", title_align="left", border_style="yellow", padding=(1, 2))
+        fato_txt = Text.from_markup(
+            f"{emoji.emojize(':cat_face:')} [bold green]Curiosidade número {repitir}[/bold green] "
+            f"{emoji.emojize(':cat_face:')}\n\n[italic green]{fato}[/italic green] "
+            f"{emoji.emojize(':cat:')}"
+        )
 
-    console.print(painel)
+        # Painel estilizado com título e borda
+        painel = Panel(fato_txt, title="Curiosidades Gatísticas", title_align="center", border_style="yellow", padding=(1, 2))
 
-    resposta = input("Você quer ouvir outro fato? (s/n): ").strip().lower()
-        
-    if resposta == 'n':
-        console.print(emoji.emojize("Obrigado por usar o programa! Até a próxima! :wave:"), style="bold red")
-        break
-    else:
-        repitir += 1
+        console.print(painel)
+
+        # Pergunta formatada para o usuário com uma linha divisória
+        console.print("[bold cyan]Você quer ouvir outro fato?[/bold cyan] [bold yellow](s/n)[/bold yellow]:", end=" ")
+
+        resposta = input().strip().lower()
+
+        if resposta == 'n':
+            console.print(emoji.emojize("\n[bold red]Obrigado por usar o programa! Até a próxima! :wave:[/bold red]"))
+            break
+        else:
+            repitir += 1
+
+if __name__ == "__main__":
+    main()
