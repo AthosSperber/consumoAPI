@@ -36,8 +36,9 @@ def main():
         carregando()
 
         fato_txt = Text.from_markup(
-            f"{emoji.emojize(':cat_face:')} [bold green]Curiosidade número {repitir}[/bold green] "
-            f"{emoji.emojize(':cat_face:')}\n\n[italic green]{fato}[/italic green] "
+            f"{emoji.emojize(':cat_face:')} [bold green]Curiosidade número {repitir}[/bold green] {emoji.emojize(':cat_face:')}\n\n"
+            f"{emoji.emojize(':cat:')}"
+            f" [italic green]{fato}[/italic green] "
             f"{emoji.emojize(':cat:')}"
         )
 
