@@ -1,1 +1,1 @@
-** * Gerador de curiosidades sobre gatos **
+* Gerador de curiosidades sobre gatos*
