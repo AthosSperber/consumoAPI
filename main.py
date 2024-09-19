@@ -41,12 +41,11 @@ def main():
             f"{emoji.emojize(':cat:')}"
         )
 
-        # Painel estilizado com título e borda
+        # título e borda
         painel = Panel(fato_txt, title="Curiosidades Gatísticas", title_align="center", border_style="yellow", padding=(1, 2))
 
         console.print(painel)
 
-        # Pergunta formatada para o usuário com uma linha divisória
         console.print("[bold cyan]Você quer ouvir outro fato?[/bold cyan] [bold yellow](s/n)[/bold yellow]:", end=" ")
 
         resposta = input().strip().lower()
